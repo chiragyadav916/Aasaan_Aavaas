@@ -1,0 +1,30 @@
+{
+  "name": "aasaan_aavaas",
+  "version": "1.0.0",
+  "description": "Welcome to Aasaan Aavaas, your hassle-free solution for finding comfortable and convenient accommodations for your dream vacation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiragyadav916/Aasaan_Aavaas.git"
+  },
+  "keywords": [
+    "Flat",
+    "Accomodations\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b_a\u001b[D\u001b[D\u001b[D\u001b[D\u001b[f"
+  ],
+  "author": "Chirag Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiragyadav916/Aasaan_Aavaas/issues"
+  },
+  "homepage": "https://github.com/chiragyadav916/Aasaan_Aavaas#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.3",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.2.2"
+  }
+}
