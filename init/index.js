@@ -1,3 +1,5 @@
+// insertion of data in DB from data.js file in init folder
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");//sample data
 const Listing = require("../models/listing.js");//for schema

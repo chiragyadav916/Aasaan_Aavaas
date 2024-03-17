@@ -1,3 +1,140 @@
-body{
-    background-color: aliceblue;
+/* giving styling to elements */
+
+body {
+    font-family: "Comic Neue", cursive !important;
+    font-weight: 500 !important;
+    font-style: normal;
+    font-optical-sizing: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    color: rgb(255, 204, 0);
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+    /*to overcome the styling of bootstrap*/
+}
+
+/*Footer*/
+.f-info-links {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-brand {
+    margin-top: 1.1rem;
+}
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Cards */
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 95% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/*Cards Effects*/
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* CSS for hover zoom out effect */
+.home-img {
+    transition: transform 0.3s ease;
+    /* Smooth transition */
+}
+
+.home-img:hover {
+    transform: scale(1.1);
+    /* Zoom out effect on hover */
+}
+
+/*New Page*/
+.add-btn {
+    background-color: rgb(255, 204, 0) !important;
+    border: none !important;
+    color: black !important;
+}
+
+/*Edit Page*/
+.edit-btn {
+    background-color: rgb(255, 204, 0) !important;
+    border: none !important;
+    color: black !important;
+}
+
+/*Show Page*/
+.show-img {
+    height: 40vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
 }
