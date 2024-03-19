@@ -7,7 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js")
-// const { listingSchema } = require("./schema.js");
+const { lisitingSchema } = require("./schema.js");
+const { valid } = require("joi");
 
 const MONGO_URl = "mongodb://127.0.0.1:27017/aasaan_aavaas";
 async function main() {
@@ -20,6 +21,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+
+//defining function for validating schema using joi
+const validateListing = (req, res, next) => {
+    let { error } = lisitingSchema.validate(req.body);//joi validation
+    if (error) {//if error exist in joi
+        let errMsg = error.details.map((el) => el.message).join(', ');//combining addtional details
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+}
 
 main()
     .then(() => {
@@ -36,7 +48,7 @@ app.get("/", (req, res) => {
 //Index Route
 app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
-    console.log(allListings)
+    // console.log(allListings);
     res.render("listings/index.ejs", { allListings });
 }));
 
@@ -53,7 +65,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Create Route
-app.post("/listings", wrapAsync(async (req, res) => {
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
     //let listing = req.body;//data is in JS object 
 
     // if (!req.body.listing) {
@@ -66,11 +78,23 @@ app.post("/listings", wrapAsync(async (req, res) => {
     // let listing = req.body.listing;
     // const newListing = new Listing(listing);//it gives an instance
 
-    if (!req.body.listing) {
-        throw new ExpressError(400, "Send valid data for listing");//custom error message
-    }
-    console.log(req.body);
+    // let result = lisitingSchema.validate(req.body);//joi validation
+    // console.log(result);
+    // if (result.error) {//if error exist in joi
+    //     throw new ExpressError(400, result.error);
+    // }
+
+    // console.log(req.body);
+
+    // if (!req.body.listing) {
+    //     throw new ExpressError(400, "Send valid data for listing");//custom error message
+    // }
+
     const newListing = new Listing(req.body.listing);//it gives an instance
+    // if (!newListing.location) {
+    //     throw new ExpressError(400, "Location is missing");
+    // }
+
     await newListing.save();
     res.redirect("/listings");
 }));
@@ -83,10 +107,10 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 //Update Route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-        throw new ExpressError(400, "Send valid data for updation");
-    }
+app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
+    // if (!req.body.listing) {
+    //     throw new ExpressError(400, "Send valid data for updation");
+    // }
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listing });//deconstructing
     res.redirect(`/listings/${id}`);
@@ -110,7 +134,6 @@ app.use((err, req, res, next) => {
     // console.log(err)
     let { statusCode = 500, message = "Something Went Wrong!" } = err;//default value
     res.status(statusCode).render("error.ejs", { message });
-
     // res.status(statusCode).send(message);
     // res.send("Something went wrong!");
 });

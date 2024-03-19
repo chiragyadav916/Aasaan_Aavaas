@@ -4,7 +4,7 @@
   "description": "Welcome to Aasaan Aavaas, your hassle-free solution for finding comfortable and convenient accommodations for your dream vacation.",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
