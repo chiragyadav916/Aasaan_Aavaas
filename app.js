@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 //Index Route
 app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
+    console.log(allListings)
     res.render("listings/index.ejs", { allListings });
 }));
 
@@ -68,6 +69,7 @@ app.post("/listings", wrapAsync(async (req, res) => {
     if (!req.body.listing) {
         throw new ExpressError(400, "Send valid data for listing");//custom error message
     }
+    console.log(req.body);
     const newListing = new Listing(req.body.listing);//it gives an instance
     await newListing.save();
     res.redirect("/listings");
@@ -105,6 +107,7 @@ app.all("*", (req, res, next) => {
 
 //Custom Error Handlers
 app.use((err, req, res, next) => {
+    // console.log(err)
     let { statusCode = 500, message = "Something Went Wrong!" } = err;//default value
     res.status(statusCode).render("error.ejs", { message });
 
